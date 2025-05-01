@@ -1,118 +1,150 @@
 <!DOCTYPE html>
 <html lang="pt_BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Frui Vita Gestacion</title>
-   <style>
-    *{
-        padding: 0;
-        margin: 0 auto;
-        text-decoration: none;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frui Vita Gestacion</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
-    html,body{
-        width: 100%;
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: #fffafc;
     }
-    .container{
+
+    .container {
+      width: 90%;
+      min-height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 2rem 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      color: #ef007f;
+    }
+
+    h3, p {
+      color: #f455aa;
+    }
+
+    .bloco {
+      width: 100%;
+      max-width: 400px;
+      padding: 2rem;
+      background-color: #f88cc7;
+      border: 1px solid #ef007f;
+      border-radius: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .bloco > h1 {
+      color: aliceblue;
+      border-bottom: #ef007f solid 2px;
+      margin-bottom: 0.5rem;
+    }
+
+    .bloco > h4, .bloco > p, .bloco > q {
+      color: aliceblue;
+    }
+
+    .bloco > q {
+      color: #f455aa;
+      border-bottom: #f455aa 2px solid;
+    }
+
+    .hrs {
+      font-size: 1.2rem;
+      color: #fff;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    /* Responsivo para telas menores */
+    @media (max-width: 600px) {
+      .bloco {
         width: 90%;
-        height: 100vh;
-        margin: 0 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+        padding: 1.5rem;
+        border-radius: 20px;
+      }
+
+      .hrs {
+        font-size: 1rem;
+      }
+
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .header h3 {
+        font-size: 1.2rem;
+      }
     }
-    .bloco{
-        width: 25%;
-        height: 25%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        border: 1px solid #ef007f;
-        background-color: #f88cc7;
-        border-radius: 40px;
-    }
-    .bloco > h1{
-        color: aliceblue;
-        border-bottom: #ef007f solid 2px;
-        margin-bottom: 3px;
-    }
-    .bloco > h4, .bloco > p{
-        color: aliceblue;
-    }
-    .header{
-        text-align: center;
-        margin-bottom: 4%;
-    }
-    h1{
-        color: #ef007f;
-    }
-    h3,p{
-        color: #f455aa;
-    }
-    .bloco > q{
-        color: #f455aa;
-        border-bottom: #f455aa 2px solid;
-    }
-   </style> 
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Gestacion</h1>
-            <h3>Suas semanas</h3>
-            <p>Aqui você ve as semanas de gestação!</p>
-        </div>
-        <div class="bloco"><h1 class="semanas">00 semanas</h1><h4 class="meses">00 meses</h4><p class="dias">00 dias</p><q>18-11-2025</q></div>
+  <div class="container">
+    <div class="header">
+      <h1>Gestacion</h1>
+      <h3>Suas semanas</h3>
+      <p>Aqui você vê as semanas de gestação!</p>
     </div>
+    <div class="bloco">
+      <h1 class="semanas">00 semanas</h1>
+      <h4 class="meses">00 meses</h4>
+      <p class="dias">00 dias</p>
+      <q>18-11-2025</q>
+    </div>
+  </div>
+
+  <script>
+    function dataAtualBrasilia() {
+      const agoraUTC = new Date();
+      const offsetBrasilia = -3;
+      const msOffset = offsetBrasilia * 60 * 60 * 1000;
+      const brasiliaDate = new Date(agoraUTC.getTime() + msOffset - agoraUTC.getTimezoneOffset() * 60 * 1000);
+      return brasiliaDate;
+    }
+
+    function Cont(dataInicio) {
+      const inicio = new Date(dataInicio);
+      const fim = dataAtualBrasilia();
+
+      inicio.setHours(0, 0, 0, 0);
+      fim.setHours(0, 0, 0, 0);
+
+      const diffMs = fim - inicio;
+      const umDiaMs = 1000 * 60 * 60 * 24;
+      const diffDias = Math.floor(diffMs / umDiaMs);
+      const diffSemanas = Math.floor(diffDias / 7);
+      const diffMeses = (fim.getFullYear() - inicio.getFullYear()) * 12 + (fim.getMonth() - inicio.getMonth());
+
+      document.querySelector('.dias').innerHTML = diffDias + ' Dias';
+      document.querySelector('.meses').innerHTML = diffMeses + ' Meses';
+      document.querySelector('.semanas').innerHTML = diffSemanas + ' Semanas';
+
+    }
+    Cont('2025-02-14');
+  </script>
 </body>
 </html>
-
-<script>
-function dataAtualBrasilia() {
-  const agoraUTC = new Date()
-  const offsetBrasilia = -3
-  const msOffset = offsetBrasilia * 60 * 60 * 1000
-  const brasiliaDate = new Date(agoraUTC.getTime() + msOffset - agoraUTC.getTimezoneOffset() * 60 * 1000)
-  return brasiliaDate
-}
-
-function Cont(dataInicio) {
-  const inicio = new Date(dataInicio)
-  const fim = dataAtualBrasilia() 
-
-  inicio.setHours(0, 0, 0, 0)
-  fim.setHours(0, 0, 0, 0)
-
-  const diffMs = fim - inicio
-  const umDiaMs = 1000 * 60 * 60 * 24
-  const diffDias = Math.floor(diffMs / umDiaMs)
-  const diffSemanas = Math.floor(diffDias / 7)
-  const diffMeses = (fim.getFullYear() - inicio.getFullYear()) * 12 + (fim.getMonth() - inicio.getMonth())
-  const diffHoras = Math.floor(diffMs / (1000 * 60 * 60))
-  const diffMinutos = Math.floor(diffMs / (1000 * 60))
-  const diffSegundos = Math.floor(diffMs / 1000)
-
-  const diasEl = document.querySelector('.dias')
-  const mesesEl = document.querySelector('.meses')
-  const semanasEl = document.querySelector('.semanas')
-
-  if (diasEl) diasEl.innerHTML = diffDias + ' Dias'
-  if (mesesEl) mesesEl.innerHTML = diffMeses + ' Meses'
-  if (semanasEl) semanasEl.innerHTML = diffSemanas + ' Semanas'
-
-  document.querySelector('.hrs').innerHTML = `<p>${String(diffHoras).padStart(2, '0')}:${String(diffMinutos % 60).padStart(2, '0')}:${String(diffSegundos % 60).padStart(2, '0')}</p>`;
-
-
-  return {
-    dias: diffDias,
-    semanas: diffSemanas,
-    meses: diffMeses
-  }
-}
-
-Cont('2025-02-14')
-
-</script>
